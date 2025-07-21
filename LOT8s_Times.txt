@@ -1,0 +1,8 @@
+Every currently supported LOT8s Flavor, and how long they run.
+
+S: 1:07 (67)
+M: 3:20 (200)
+K: 2:20 (140)
+E: 1:40 (100)
+D: 1:40 (100)
+L: 3:15 (195)

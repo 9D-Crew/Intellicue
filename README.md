@@ -8,6 +8,7 @@
 ```
 Heartbeat Generator for domestic Intellistar 1 systems.
 
+
 (C) 2025 9D Crew
 
 ## Requirements

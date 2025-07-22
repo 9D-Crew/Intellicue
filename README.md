@@ -122,7 +122,3 @@ The script will:
 * A background thread monitors for password prompts and auto-replies.
 * LDL is explicitly disabled before each LOT8s cycle to avoid conflicts.
 * Intended for use with real IntelliStar 1s
-
----
-
-Let me know if you’d like a `LOT8s_Times.txt` reference table or want to include screenshots or output examples.

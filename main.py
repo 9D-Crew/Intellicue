@@ -56,12 +56,14 @@ shell.send("runomni /twc/util/toggleNationalLDL.pyc 0\n") # disable ldl because 
 
 # Local on the 8s Flavor Length Lookup Table
 lot8s_times = {
-    'S': 67,
-    'M' : 200,
-    'K' : 140,
-    'E' : 100,
-    'D' : 100,
-    'L' : 195
+    'D': 100,
+    'E': 100,
+    'K': 140,
+    'L': 195,
+    'M': 200,
+    'N': 162,
+    'O': 145,
+    'S': 67
 }
 
 # Function for calculating time until LOT8s.

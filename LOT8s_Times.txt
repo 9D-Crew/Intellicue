@@ -1,5 +1,12 @@
+Flavors supported by the Perris I1:
+D, E, K, L, M, N, O, and S.
+Flavors supported by the Flat Rock I1:
+A, B, S, U, and Y.
+
 Every currently supported LOT8s Flavor, and how long they run.
 
+A:
+B:
 D: 1:40 (100)
 E: 1:40 (100)
 K: 2:20 (140)
@@ -8,3 +15,5 @@ M: 3:20 (200)
 N: 2:42 (162)
 O: 2:25 (145)
 S: 1:07 (67)
+U:
+Y:

@@ -31,7 +31,7 @@ print(f"Using LOT8s Flavor: {lot8s} and LDL Flavor: {ldl}")
 
 # i1 Connection
 print("Connecting to i1..")
-global ssh_client, shell; ssh_client = paramiko.SSHClient()
+global ssh_client, shell, password; ssh_client = paramiko.SSHClient()
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh_client.connect(ip, port=port, username=username, password=password, look_for_keys=False, allow_agent=False)
 shell = ssh_client.invoke_shell()
@@ -41,7 +41,7 @@ def password_man(): # this is in i1-encoder, so its probably important..
     while True:
         output = shell.recv(1024).decode()
         if "Password:" in output:
-            shell.send("i1\n")
+            shell.send(f"{password}\n")
 
 threading.Thread(target=password_man, daemon=True).start()
 shell.send("su -l dgadmin\n") # switch to dgadmin
@@ -103,4 +103,5 @@ while True: # Main Loop
     cmd(f"runomni /twc/util/load.pyc local {lot8s}") # Load LOT8s
     time_py.sleep(0.1) # race condition fix
     cmd(f"runomni /twc/util/run.pyc local") # Run LOT8s
+
     time = lot8s_times.get(lot8s); time_py.sleep(time) # Wait for LOT8s to finish

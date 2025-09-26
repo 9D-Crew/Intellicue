@@ -24,10 +24,10 @@ config = configparser.ConfigParser(); config.read('config.ini')
 ssh_config = config['SSH']; flavor_config = config['FLAVOR']
 ip = ssh_config.get('IP'); port = ssh_config.getint('PORT')
 username = ssh_config.get('USERNAME'); password = ssh_config.get('PASSWORD')
-lot8s = flavor_config.get('LOT8S'); ldl = flavor_config.get('LDL')
+lot8s = flavor_config.get('LOT8S'); ldl = flavor_config.get('LDL'); ldl_flavor = flavor_config.get('LDL_TYPE')
 run_time = flavor_config.getint('RUN_TIME')
 print("Config Loaded Successfully.")
-print(f"Using LOT8s Flavor: {lot8s} and LDL Flavor: {ldl}")
+print(f"Using LOT8s Flavor: {lot8s} and LDL Flavor: {ldl_flavor}")
 
 # i1 Connection
 print("Connecting to i1..")
@@ -97,7 +97,13 @@ def lot8s_time_calc(run_time: int) -> int:
 print("Setup done, Starting loop.")
 
 while True: # Main Loop
-    cmd(f"runomni /twc/util/toggleNationalLDL.pyc {ldl}") # Start LDL
+
+    if ldl_flavor == 0: # Start LDL
+        cmd(f"runomni /twc/util/toggleNationalLDL.pyc {ldl}")
+    else:
+        # if flavor specified, run that flavor
+        cmd(f"runomni /twc/util/toggleNationalLDL.pyc {ldl} {ldl_flavor}")
+    
     time = lot8s_time_calc(run_time); time_py.sleep(time / 1000) # Wait for next LOT8s Cue
     cmd(f"runomni /twc/util/toggleNationalLDL.pyc 0") # Stop LDL
     cmd(f"runomni /twc/util/load.pyc local {lot8s}") # Load LOT8s

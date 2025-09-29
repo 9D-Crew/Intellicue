@@ -23,7 +23,9 @@ print("Loading config..")
 config = configparser.ConfigParser(); config.read('config.ini')
 ssh_config = config['SSH']; flavor_config = config['FLAVOR']
 ip = ssh_config.get('IP'); port = ssh_config.getint('PORT')
-username = ssh_config.get('USERNAME'); password = ssh_config.get('PASSWORD')
+username = ssh_config.get('USERNAME')
+global password
+password = ssh_config.get('PASSWORD')
 lot8s = flavor_config.get('LOT8S'); ldl = flavor_config.get('LDL'); ldl_flavor = flavor_config.get('LDL_TYPE')
 run_time = flavor_config.getint('RUN_TIME')
 print("Config Loaded Successfully.")
@@ -31,7 +33,8 @@ print(f"Using LOT8s Flavor: {lot8s} and LDL Flavor: {ldl_flavor}")
 
 # i1 Connection
 print("Connecting to i1..")
-global ssh_client, shell, password; ssh_client = paramiko.SSHClient()
+global ssh_client, shell
+ssh_client = paramiko.SSHClient()
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh_client.connect(ip, port=port, username=username, password=password, look_for_keys=False, allow_agent=False)
 shell = ssh_client.invoke_shell()
@@ -48,7 +51,7 @@ shell.send("su -l dgadmin\n") # switch to dgadmin
 
 def cmd(command):
     global shell
-    print(f">{command}")
+    print(f"▶ [{datetime.datetime.now()}] | {command}")
     shell.send(command + "\n")
 
 print("i1 Connected.")
